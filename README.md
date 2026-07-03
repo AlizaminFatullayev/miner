@@ -1,16 +1,57 @@
-# React + Vite
+# Miner — Industrial Mining & Resource Group
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Marketing site for Miner Resource Group, a full-cycle mining company:
+exploration, extraction, processing and site rehabilitation. Single-page
+React app with an animated geological hero, scroll-reveal sections,
+animated stat counters and a contact form.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- [React 19](https://react.dev) + [Vite](https://vite.dev)
+- [Tailwind CSS v4](https://tailwindcss.com) (CSS-first config, no `tailwind.config.js`)
+- [lucide-react](https://lucide.dev) for icons
+- No other runtime dependencies — the hero background, mine cross-section
+  diagram and social icons are hand-rolled SVG/CSS
 
-## React Compiler
+## Getting started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the Oxlint configuration
+The dev server runs on <http://localhost:5173>.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Scripts
+
+| Command           | What it does                     |
+| ----------------- | -------------------------------- |
+| `npm run dev`     | Start the Vite dev server        |
+| `npm run build`   | Production build into `dist/`    |
+| `npm run preview` | Serve the production build       |
+| `npm run lint`    | Lint with oxlint                 |
+
+## Project structure
+
+```
+src/
+  components/   Navbar, Hero, Services, About, Stats,
+                Testimonials, Contact, Footer, shared bits
+  hooks/        useReveal (IntersectionObserver reveals),
+                useCountUp (rAF counters)
+  index.css     Tailwind theme tokens + keyframes
+```
+
+## Design notes
+
+- Palette: coal (near-black), steel (cool greys), ash (off-white) and a
+  single ember/amber accent. Type: Barlow Condensed for display, Barlow
+  for body, IBM Plex Mono for technical labels.
+- All motion (strata drift, dust, counters, reveals) is CSS/rAF only and
+  is disabled under `prefers-reduced-motion`.
+
+## Deployment
+
+Deployed on Netlify — `netlify.toml` pins the build command, publish
+directory and Node version. Any push to `main` triggers a deploy when the
+repo is connected to a Netlify site.
