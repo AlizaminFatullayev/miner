@@ -72,13 +72,15 @@ export default function Contact() {
                 ))}
               </ul>
 
-              <div className="mt-auto border border-ember-500/30 bg-ember-500/5 p-5 pt-5 max-lg:mt-10">
-                <p className="font-mono text-[10px] tracking-[0.24em] text-ember-400 uppercase">
-                  Site emergency · 24/7
-                </p>
-                <p className="font-display mt-1.5 text-2xl font-semibold tracking-wider text-ash-50">
-                  +61 8 9200 4999
-                </p>
+              <div className="mt-auto pt-10">
+                <div className="border border-ember-500/30 bg-ember-500/5 p-5">
+                  <p className="font-mono text-[10px] tracking-[0.24em] text-ember-400 uppercase">
+                    Site emergency · 24/7
+                  </p>
+                  <p className="font-display mt-1.5 text-2xl font-semibold tracking-wider text-ash-50">
+                    +61 8 9200 4999
+                  </p>
+                </div>
               </div>
             </div>
           </Reveal>
