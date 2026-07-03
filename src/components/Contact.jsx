@@ -4,9 +4,9 @@ import Reveal from './Reveal'
 import SectionHeader from './SectionHeader'
 
 const CONTACT_DETAILS = [
-  { icon: MapPin, label: 'Head office', value: '44 Foundry Road, Perth WA 6000, Australia' },
-  { icon: Phone, label: 'Project desk', value: '+61 8 9200 4410' },
-  { icon: Mail, label: 'Email', value: 'projects@minergroup.com', href: 'mailto:projects@minergroup.com' },
+  { icon: MapPin, label: 'Head office', value: 'Baku' },
+  { icon: Phone, label: 'Project desk', value: '+994 50 782 5152' },
+  { icon: Mail, label: 'Email', value: 'alizaminfatullayev100@gmail.com', href: 'mailto:alizaminfatullayev100@gmail.com' },
   { icon: Clock, label: 'Hours', value: 'Mon–Fri · 07:00–18:00 AWST' },
 ]
 
@@ -78,7 +78,7 @@ export default function Contact() {
                     Site emergency · 24/7
                   </p>
                   <p className="font-display mt-1.5 text-2xl font-semibold tracking-wider text-ash-50">
-                    +61 8 9200 4999
+                    +994 50 782 51 52
                   </p>
                 </div>
               </div>
