@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens — industrial palette & type system
+   coal   → near-black backgrounds
+   steel  → cool mid-greys for borders, muted text
+   ash    → warm off-whites for copy
+   ember  → molten amber accent
+--------------------------------------------------------------------------- */
+@theme {
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-coal-950: #0b0d11;
+  --color-coal-900: #12151b;
+  --color-coal-850: #171b22;
+  --color-coal-800: #1d222b;
+  --color-coal-700: #262c37;
+
+  --color-steel-600: #39414f;
+  --color-steel-500: #4c5565;
+  --color-steel-400: #6f788a;
+  --color-steel-300: #939cab;
+  --color-steel-200: #b8bec9;
+
+  --color-ash-100: #e7e9ec;
+  --color-ash-50: #f4f5f7;
+
+  --color-ember-600: #c8842a;
+  --color-ember-500: #e8a33d;
+  --color-ember-400: #f0b55e;
+  --color-ember-300: #f7ca86;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem; /* clearance for the fixed header */
+  }
+
+  body {
+    @apply bg-coal-950 font-sans text-ash-100 antialiased;
+  }
+
+  ::selection {
+    @apply bg-ember-500 text-coal-950;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ember-500);
+    outline-offset: 3px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll-reveal — elements start hidden, slide up when they enter the viewport
+--------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Hero atmosphere
+--------------------------------------------------------------------------- */
+
+/* film-grain overlay, generated noise — no image assets */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* faint hazard-stripe texture for the stats band */
+.bg-hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(232, 163, 61, 0.05) 0px,
+    rgba(232, 163, 61, 0.05) 1px,
+    transparent 1px,
+    transparent 14px
+  );
+}
+
+@keyframes strata-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes dust-rise {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: var(--dust-opacity, 0.5);
+  }
+  85% {
+    opacity: var(--dust-opacity, 0.5);
+  }
+  100% {
+    transform: translateY(-46vh) translateX(3vw);
+    opacity: 0;
+  }
+}
+
+@keyframes ember-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes cue-slide {
+  0% {
+    transform: translateY(-100%);
+  }
+  55%,
+  100% {
+    transform: translateY(240%);
+  }
+}
+
+.animate-strata-slow {
+  animation: strata-drift 90s linear infinite;
+}
+
+.animate-strata-fast {
+  animation: strata-drift 55s linear infinite;
+}
+
+.animate-dust {
+  animation: dust-rise var(--dust-duration, 14s) linear infinite;
+  animation-delay: var(--dust-delay, 0s);
+}
+
+.animate-ember-pulse {
+  animation: ember-pulse 5s ease-in-out infinite;
+}
+
+.animate-cue {
+  animation: cue-slide 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion — kill animation and reveal everything immediately
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .animate-dust {
+    display: none;
+  }
+}
